@@ -83,8 +83,10 @@ describe('addition of a new note', () => {
       important: true,
     }
 
+
+
     await api
-      .post('/api/notes')
+      .post('/api/login')
       .send(newNote)
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -99,7 +101,7 @@ describe('addition of a new note', () => {
     )
   })
 
-  test('fails with status code 400 if data invalid', async () => {
+  test('fails with status code 401 if data invalid', async () => {
     const newNote = {
       important: true
     }
@@ -107,7 +109,7 @@ describe('addition of a new note', () => {
     await api
       .post('/api/notes')
       .send(newNote)
-      .expect(400)
+      .expect(401)
 
     const notesAtEnd = await helper.notesInDb()
 

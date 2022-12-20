@@ -2,6 +2,7 @@ const notesRouter = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const getTokenFrom = require('../utils/getTokenFrom')
 
 notesRouter.get('/', async (request, response) => {
   //Promesas con then
@@ -34,13 +35,6 @@ notesRouter.get('/:id', async (request, response) => {
   //   .catch(error => next(error))
 })
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
 
 notesRouter.post('/', async (request, response) => {
   const body = request.body
