@@ -10,6 +10,7 @@ const propertiesRouter = require('./controllers/properties')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -21,6 +22,9 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connecting to MongoDB:', error.message)
   })
 
+app.use('/public/images', express.static(__dirname + '/public/images/'))
+app.use(bodyParser.json({ limit: '100mb' }))
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())

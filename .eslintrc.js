@@ -12,10 +12,8 @@ module.exports = {
     'ecmaVersion': 'latest'
   },
   'rules': {
-    'indent': [
-      'error',
-      2
-    ],
+
+    'indent': 'off',
     'linebreak-style': [
       'error',
       'windows'
